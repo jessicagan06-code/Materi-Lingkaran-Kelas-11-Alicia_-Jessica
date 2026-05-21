@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Media Pembelajaran Lingkaran Kelas 11</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+<!-- Particle canvas (full page background) -->
+<canvas id="particleCanvas"></canvas>
+
+<nav class="navbar">
+  <div class="nav-brand">⭕ Lingkaran Kelas 11</div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#" class="nav-link active" onclick="showPage('home',this);return false;">Home</a></li>
+    <li><a href="#" class="nav-link" onclick="showPage('materi',this);return false;">Materi</a></li>
+    <li><a href="#" class="nav-link" onclick="showPage('rumus',this);return false;">Rumus Cepat</a></li>
+    <li><a href="#" class="nav-link" onclick="showPage('visual',this);return false;">Visual Interaktif</a></li>
+    <li><a href="#" class="nav-link" onclick="showPage('latihan',this);return false;">Latihan Soal</a></li>
+    <li><a href="#" class="nav-link" onclick="showPage('kuis',this);return false;">Kuis</a></li>
+    <li><a href="#" class="nav-link" onclick="showPage('profil',this);return false;">Profil</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()">&#9776;</button>
+</nav>
+
+<main id="app">
+
+<!-- ===== HOME ===== -->
+<section id="page-home" class="page active">
+  <div class="hero">
+    <div class="hero-content">
+      <div class="hero-badge">Matematika Kelas 11</div>
+      <h1>Belajar <span class="highlight">Lingkaran</span><br>Lebih Mudah &amp; Seru</h1>
+      <p>Pelajari semua konsep lingkaran mulai dari unsur-unsur, rumus, sudut, persamaan, hingga garis singgung — lengkap dengan visual interaktif dan kuis.</p>
+      <div class="hero-btns">
+        <button class="btn-primary" onclick="showPage('materi',null)">🚀 Mulai Belajar</button>
+        <button class="btn-outline" onclick="showPage('visual',null)">🎨 Visual Interaktif</button>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <canvas id="heroCanvas" width="300" height="300"></canvas>
+    </div>
+  </div>
+
+  <div class="section-title">
+    <h2>Apa yang Akan Kamu Pelajari?</h2>
+    <p>Materi lengkap lingkaran kelas 11 dalam satu tempat</p>
+  </div>
+  <div class="card-grid">
+    <div class="card" onclick="showPage('materi',null)">
+      <div class="card-icon">📐</div>
+      <h3>Unsur Lingkaran</h3>
+      <p>Titik pusat, jari-jari, diameter, busur, tali busur, juring, tembereng, apotema</p>
+    </div>
+    <div class="card" onclick="showPage('materi',null)">
+      <div class="card-icon">📏</div>
+      <h3>Keliling &amp; Luas</h3>
+      <p>K = 2πr dan L = πr² beserta contoh soal penerapannya</p>
+    </div>
+    <div class="card" onclick="showPage('materi',null)">
+      <div class="card-icon">🔺</div>
+      <h3>Sudut Lingkaran</h3>
+      <p>Sudut pusat, sudut keliling, dan hubungan keduanya</p>
+    </div>
+    <div class="card" onclick="showPage('materi',null)">
+      <div class="card-icon">📈</div>
+      <h3>Persamaan Lingkaran</h3>
+      <p>Bentuk standar dan bentuk umum persamaan lingkaran</p>
+    </div>
+    <div class="card" onclick="showPage('materi',null)">
+      <div class="card-icon">✏️</div>
+      <h3>Garis Singgung</h3>
+      <p>GSPL, GSPD, dan sifat-sifat garis singgung lingkaran</p>
+    </div>
+    <div class="card" onclick="showPage('kuis',null)">
+      <div class="card-icon">🏆</div>
+      <h3>Kuis Interaktif</h3>
+      <p>Uji pemahamanmu dan lihat skor secara langsung</p>
+    </div>
+  </div>
+
+  <div class="tujuan-section">
+    <h2>🎯 Tujuan Pembelajaran</h2>
+    <div class="tujuan-list">
+      <div class="tujuan-item"><span class="check">✓</span> Memahami pengertian dan unsur-unsur lingkaran</div>
+      <div class="tujuan-item"><span class="check">✓</span> Menghitung keliling, luas, panjang busur, dan luas juring</div>
+      <div class="tujuan-item"><span class="check">✓</span> Memahami hubungan sudut pusat dan sudut keliling</div>
+      <div class="tujuan-item"><span class="check">✓</span> Menentukan persamaan lingkaran dalam koordinat kartesius</div>
+      <div class="tujuan-item"><span class="check">✓</span> Menentukan posisi titik dan garis terhadap lingkaran</div>
+      <div class="tujuan-item"><span class="check">✓</span> Menghitung panjang garis singgung persekutuan dua lingkaran</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MATERI ===== -->
+<section id="page-materi" class="page">
+  <div class="page-header">
+    <h1>📚 Materi Lingkaran</h1>
+    <p>Pilih topik yang ingin kamu pelajari</p>
+  </div>
+
+  <div class="tab-container">
+    <div class="tabs">
+      <button class="tab active" onclick="showTab('unsur',this)">Unsur</button>
+      <button class="tab" onclick="showTab('keliling',this)">Keliling &amp; Luas</button>
+      <button class="tab" onclick="showTab('busur',this)">Busur &amp; Juring</button>
+      <button class="tab" onclick="showTab('sudut',this)">Sudut</button>
+      <button class="tab" onclick="showTab('tali',this)">Tali Busur</button>
+      <button class="tab" onclick="showTab('dualingkaran',this)">Dua Lingkaran</button>
+      <button class="tab" onclick="showTab('garissinggung',this)">Garis Singgung</button>
+      <button class="tab" onclick="showTab('persamaan',this)">Persamaan</button>
+      <button class="tab" onclick="showTab('posisi',this)">Posisi Titik &amp; Garis</button>
+    </div>
+
+    <!-- TAB: UNSUR -->
+    <div id="tab-unsur" class="tab-content active">
+      <h2>Unsur-Unsur Lingkaran</h2>
+      <div class="definition-box">
+        <strong>Definisi:</strong> Lingkaran adalah himpunan titik-titik pada bidang yang memiliki jarak sama terhadap satu titik tertentu (pusat).
+      </div>
+      <div class="unsur-grid">
+        <div class="unsur-card"><div class="unsur-icon">🔵</div><h4>Titik Pusat</h4><p>Titik tengah lingkaran yang menjadi acuan semua titik pada lingkaran.</p></div>
+        <div class="unsur-card"><div class="unsur-icon">📏</div><h4>Jari-jari (r)</h4><p>Garis dari pusat ke titik mana pun pada lingkaran. Semua jari-jari sama panjang.</p></div>
+        <div class="unsur-card"><div class="unsur-icon">↔️</div><h4>Diameter (d)</h4><p>Garis yang melalui pusat dan menghubungkan dua titik pada lingkaran. <strong>d = 2r</strong></p></div>
+        <div class="unsur-card"><div class="unsur-icon">🌙</div><h4>Busur</h4><p>Bagian lengkung pada lingkaran yang menghubungkan dua titik.</p></div>
+        <div class="unsur-card"><div class="unsur-icon">📐</div><h4>Tali Busur</h4><p>Garis lurus yang menghubungkan dua titik pada lingkaran (tidak melalui pusat).</p></div>
+        <div class="unsur-card"><div class="unsur-icon">🍕</div><h4>Juring</h4><p>Daerah yang dibatasi dua jari-jari dan satu busur (seperti irisan pizza).</p></div>
+        <div class="unsur-card"><div class="unsur-icon">🌊</div><h4>Tembereng</h4><p>Daerah yang dibatasi tali busur dan busurnya.</p></div>
+        <div class="unsur-card"><div class="unsur-icon">📍</div><h4>Apotema</h4><p>Jarak terpendek dari pusat lingkaran ke tali busur (tegak lurus tali busur).</p></div>
+      </div>
+      <div class="unsur-diagram">
+        <canvas id="unsurCanvas" width="380" height="380"></canvas>
+        <div class="diagram-legend">
+          <div><span class="dot red"></span> Titik Pusat (O)</div>
+          <div><span class="dot blue"></span> Jari-jari (r)</div>
+          <div><span class="dot green"></span> Diameter (d)</div>
+          <div><span class="dot orange"></span> Tali Busur</div>
+          <div><span class="dot purple"></span> Apotema</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: KELILING & LUAS -->
+    <div id="tab-keliling" class="tab-content">
+      <h2>Keliling &amp; Luas Lingkaran</h2>
+      <div class="rumus-row">
+        <div class="rumus-box blue">
+          <h3>Keliling Lingkaran</h3>
+          <div class="formula">\( K = 2\pi r \)</div>
+          <div class="formula-or">atau</div>
+          <div class="formula">\( K = \pi d \)</div>
+          <div class="keterangan">
+            <p>K = keliling &nbsp;|&nbsp; r = jari-jari &nbsp;|&nbsp; d = diameter</p>
+            <p>π = 22/7 ≈ 3,14</p>
+          </div>
+        </div>
+        <div class="rumus-box green">
+          <h3>Luas Lingkaran</h3>
+          <div class="formula">\( L = \pi r^2 \)</div>
+          <div class="keterangan">
+            <p>L = luas &nbsp;|&nbsp; r = jari-jari</p>
+            <p>π = 22/7 ≈ 3,14</p>
+          </div>
+        </div>
+      </div>
+      <div class="kalkulator-box">
+        <h3>🧮 Kalkulator Keliling &amp; Luas</h3>
+        <div class="calc-input">
+          <label>Jari-jari (r):</label>
+          <input type="number" id="inputR" placeholder="Masukkan nilai r" min="0" oninput="hitungKeliling()"/>
+          <span>satuan</span>
+        </div>
+        <div class="calc-result">
+          <div class="result-item"><span>Keliling:</span><strong id="hasilK">—</strong></div>
+          <div class="result-item"><span>Luas:</span><strong id="hasilL">—</strong></div>
+          <div class="result-item"><span>Diameter:</span><strong id="hasilD">—</strong></div>
+        </div>
+      </div>
+      <div class="contoh-box">
+        <h3>📝 Contoh Soal</h3>
+        <p><strong>Soal:</strong> Sebuah lingkaran memiliki jari-jari 7 cm. Hitunglah keliling dan luasnya! (π = 22/7)</p>
+        <div class="jawaban">
+          <p><strong>Jawab:</strong></p>
+          <p>Keliling = 2 × (22/7) × 7 = 2 × 22 = <strong>44 cm</strong></p>
+          <p>Luas = (22/7) × 7² = (22/7) × 49 = 22 × 7 = <strong>154 cm²</strong></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: BUSUR & JURING -->
+    <div id="tab-busur" class="tab-content">
+      <h2>Panjang Busur &amp; Luas Juring</h2>
+      <div class="rumus-row">
+        <div class="rumus-box blue">
+          <h3>Panjang Busur</h3>
+          <div class="formula">\( s = \dfrac{\theta}{360°} \times 2\pi r \)</div>
+          <div class="keterangan"><p>s = panjang busur &nbsp;|&nbsp; θ = sudut pusat</p></div>
+        </div>
+        <div class="rumus-box orange">
+          <h3>Luas Juring</h3>
+          <div class="formula">\( L = \dfrac{\theta}{360°} \times \pi r^2 \)</div>
+          <div class="keterangan"><p>L = luas juring &nbsp;|&nbsp; θ = sudut pusat</p></div>
+        </div>
+      </div>
+      <div class="kalkulator-box">
+        <h3>🧮 Kalkulator Busur &amp; Juring</h3>
+        <div class="calc-input">
+          <label>Jari-jari (r):</label>
+          <input type="number" id="inputR2" placeholder="r" min="0" oninput="hitungBusur()"/>
+        </div>
+        <div class="calc-input">
+          <label>Sudut pusat (θ):</label>
+          <input type="number" id="inputTheta" placeholder="derajat" min="0" max="360" oninput="hitungBusur()"/>
+          <span>°</span>
+        </div>
+        <div class="calc-result">
+          <div class="result-item"><span>Panjang Busur:</span><strong id="hasilBusur">—</strong></div>
+          <div class="result-item"><span>Luas Juring:</span><strong id="hasilJuring">—</strong></div>
+        </div>
+      </div>
+      <div class="contoh-box">
+        <h3>📝 Contoh Soal</h3>
+        <p><strong>Soal:</strong> Lingkaran berjari-jari 10 cm dengan sudut pusat 90°. Hitung panjang busur dan luas juringnya! (π = 3,14)</p>
+        <div class="jawaban">
+          <p><strong>Jawab:</strong></p>
+          <p>Panjang busur = (90/360) × 2 × 3,14 × 10 = ¼ × 62,8 = <strong>15,7 cm</strong></p>
+          <p>Luas juring = (90/360) × 3,14 × 10² = ¼ × 314 = <strong>78,5 cm²</strong></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: SUDUT -->
+    <div id="tab-sudut" class="tab-content">
+      <h2>Sudut pada Lingkaran</h2>
+      <div class="rumus-row">
+        <div class="rumus-box blue">
+          <h3>Sudut Pusat</h3>
+          <p>Sudut yang titik sudutnya berada di <strong>pusat lingkaran</strong>.</p>
+        </div>
+        <div class="rumus-box green">
+          <h3>Sudut Keliling</h3>
+          <p>Sudut yang titik sudutnya berada <strong>pada lingkaran</strong>.</p>
+        </div>
+      </div>
+      <div class="rumus-box purple full-width">
+        <h3>Hubungan Sudut Pusat &amp; Sudut Keliling</h3>
+        <div class="formula">\( \text{Sudut Pusat} = 2 \times \text{Sudut Keliling} \)</div>
+        <p style="text-align:center;margin-top:8px">Keduanya menghadap busur yang sama</p>
+      </div>
+      <div class="rumus-box orange full-width">
+        <h3>Sudut Keliling Menghadap Diameter</h3>
+        <div class="formula">\( \angle = 90° \)</div>
+        <p style="text-align:center;margin-top:8px">Sudut keliling yang menghadap diameter selalu bernilai 90°</p>
+      </div>
+      <div class="rumus-row">
+        <div class="rumus-box teal">
+          <h3>Sudut Dalam Lingkaran</h3>
+          <div class="formula">\( \text{Sudut} = \dfrac{1}{2}(\text{jumlah busur}) \)</div>
+        </div>
+        <div class="rumus-box red">
+          <h3>Sudut Luar Lingkaran</h3>
+          <div class="formula">\( \text{Sudut} = \dfrac{1}{2}(\text{selisih busur}) \)</div>
+        </div>
+      </div>
+      <div class="contoh-box">
+        <h3>📝 Contoh Soal</h3>
+        <p><strong>Soal:</strong> Sudut pusat AOB = 120°. Berapakah sudut keliling ACB yang menghadap busur AB?</p>
+        <div class="jawaban">
+          <p><strong>Jawab:</strong></p>
+          <p>Sudut keliling = ½ × sudut pusat = ½ × 120° = <strong>60°</strong></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: TALI BUSUR -->
+    <div id="tab-tali" class="tab-content">
+      <h2>Panjang Tali Busur &amp; Luas Segitiga</h2>
+      <div class="rumus-row">
+        <div class="rumus-box blue">
+          <h3>Panjang Tali Busur</h3>
+          <div class="formula">\( AB = 2r \sin\dfrac{\theta}{2} \)</div>
+          <div class="keterangan">
+            <p>AB = panjang tali busur</p>
+            <p>r = jari-jari &nbsp;|&nbsp; θ = sudut pusat</p>
+          </div>
+        </div>
+        <div class="rumus-box green">
+          <h3>Luas Segitiga dalam Lingkaran</h3>
+          <div class="formula">\( L = \dfrac{1}{2}ab\sin C \)</div>
+          <div class="formula-or">Jika a = b = r:</div>
+          <div class="formula">\( L = \dfrac{1}{2}r^2 \sin\theta \)</div>
+        </div>
+      </div>
+      <div class="kalkulator-box">
+        <h3>🧮 Kalkulator Tali Busur</h3>
+        <div class="calc-input">
+          <label>Jari-jari (r):</label>
+          <input type="number" id="inputR3" placeholder="r" min="0" oninput="hitungTali()"/>
+        </div>
+        <div class="calc-input">
+          <label>Sudut pusat (θ):</label>
+          <input type="number" id="inputTheta2" placeholder="derajat" min="0" max="360" oninput="hitungTali()"/>
+          <span>°</span>
+        </div>
+        <div class="calc-result">
+          <div class="result-item"><span>Panjang Tali Busur:</span><strong id="hasilTali">—</strong></div>
+          <div class="result-item"><span>Luas Segitiga:</span><strong id="hasilSegitiga">—</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: DUA LINGKARAN -->
+    <div id="tab-dualingkaran" class="tab-content">
+      <h2>Kedudukan Dua Lingkaran</h2>
+      <div class="kedudukan-grid">
+        <div class="kedudukan-card">
+          <canvas class="kd-canvas" id="kd1" width="160" height="160"></canvas>
+          <h4>Berpotongan di Dua Titik</h4>
+          <p>Dua lingkaran saling memotong di dua titik berbeda.</p>
+        </div>
+        <div class="kedudukan-card">
+          <canvas class="kd-canvas" id="kd2" width="160" height="160"></canvas>
+          <h4>Bersinggungan Luar</h4>
+          <p>Dua lingkaran bersentuhan di satu titik dari luar.</p>
+        </div>
+        <div class="kedudukan-card">
+          <canvas class="kd-canvas" id="kd3" width="160" height="160"></canvas>
+          <h4>Bersinggungan Dalam</h4>
+          <p>Satu lingkaran berada di dalam lingkaran lain dan bersentuhan.</p>
+        </div>
+        <div class="kedudukan-card">
+          <canvas class="kd-canvas" id="kd4" width="160" height="160"></canvas>
+          <h4>Tidak Berpotongan</h4>
+          <p>Dua lingkaran terpisah, tidak bersentuhan.</p>
+        </div>
+        <div class="kedudukan-card">
+          <canvas class="kd-canvas" id="kd5" width="160" height="160"></canvas>
+          <h4>Konsentris</h4>
+          <p>Dua lingkaran memiliki pusat yang sama.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: GARIS SINGGUNG -->
+    <div id="tab-garissinggung" class="tab-content">
+      <h2>Garis Singgung Lingkaran</h2>
+      <div class="definition-box">
+        <strong>Sifat:</strong> Garis singgung selalu <strong>tegak lurus</strong> terhadap jari-jari pada titik singgung.
+      </div>
+      <div class="rumus-row">
+        <div class="rumus-box blue">
+          <h3>Garis Singgung Persekutuan Luar (GSPL)</h3>
+          <div class="formula">\( d = \sqrt{p^2 - (R-r)^2} \)</div>
+          <div class="keterangan">
+            <p>d = panjang garis singgung</p>
+            <p>p = jarak pusat dua lingkaran</p>
+            <p>R = jari-jari besar &nbsp;|&nbsp; r = jari-jari kecil</p>
+          </div>
+        </div>
+        <div class="rumus-box orange">
+          <h3>Garis Singgung Persekutuan Dalam (GSPD)</h3>
+          <div class="formula">\( d = \sqrt{p^2 - (R+r)^2} \)</div>
+          <div class="keterangan">
+            <p>d = panjang garis singgung</p>
+            <p>p = jarak pusat dua lingkaran</p>
+            <p>R = jari-jari besar &nbsp;|&nbsp; r = jari-jari kecil</p>
+          </div>
+        </div>
+      </div>
+      <div class="kalkulator-box">
+        <h3>🧮 Kalkulator Garis Singgung</h3>
+        <div class="calc-input"><label>Jarak pusat (p):</label><input type="number" id="gsP" placeholder="p" min="0" oninput="hitungGS()"/></div>
+        <div class="calc-input"><label>Jari-jari besar (R):</label><input type="number" id="gsR" placeholder="R" min="0" oninput="hitungGS()"/></div>
+        <div class="calc-input"><label>Jari-jari kecil (r):</label><input type="number" id="gsr" placeholder="r" min="0" oninput="hitungGS()"/></div>
+        <div class="calc-result">
+          <div class="result-item"><span>GSPL:</span><strong id="hasilGSPL">—</strong></div>
+          <div class="result-item"><span>GSPD:</span><strong id="hasilGSPD">—</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: PERSAMAAN -->
+    <div id="tab-persamaan" class="tab-content">
+      <h2>Persamaan Lingkaran</h2>
+      <div class="rumus-row">
+        <div class="rumus-box blue">
+          <h3>Berpusat di O(0,0)</h3>
+          <div class="formula">\( x^2 + y^2 = r^2 \)</div>
+        </div>
+        <div class="rumus-box green">
+          <h3>Berpusat di P(a,b)</h3>
+          <div class="formula">\( (x-a)^2 + (y-b)^2 = r^2 \)</div>
+          <div class="keterangan"><p>(a,b) = pusat &nbsp;|&nbsp; r = jari-jari</p></div>
+        </div>
+      </div>
+      <div class="rumus-box purple full-width">
+        <h3>Bentuk Umum Persamaan Lingkaran</h3>
+        <div class="formula">\( x^2 + y^2 + Ax + By + C = 0 \)</div>
+        <div class="rumus-row" style="margin-top:16px">
+          <div style="flex:1;text-align:center">
+            <p><strong>Pusat:</strong></p>
+            <div class="formula small">\( P\!\left(-\dfrac{A}{2},\,-\dfrac{B}{2}\right) \)</div>
+          </div>
+          <div style="flex:1;text-align:center">
+            <p><strong>Jari-jari:</strong></p>
+            <div class="formula small">\( r = \sqrt{\left(\dfrac{A}{2}\right)^2+\left(\dfrac{B}{2}\right)^2-C} \)</div>
+          </div>
+        </div>
+      </div>
+      <div class="rumus-box teal full-width">
+        <h3>Menentukan Jari-jari (jika pusat &amp; titik diketahui)</h3>
+        <div class="formula">\( r = \sqrt{(x-a)^2+(y-b)^2} \)</div>
+      </div>
+      <div class="contoh-box">
+        <h3>📝 Contoh Soal</h3>
+        <p><strong>Soal:</strong> Tentukan pusat dan jari-jari lingkaran: x² + y² + 6x − 4y − 3 = 0</p>
+        <div class="jawaban">
+          <p><strong>Jawab:</strong> A = 6, B = −4, C = −3</p>
+          <p>Pusat = (−6/2, −(−4)/2) = <strong>(−3, 2)</strong></p>
+          <p>r = √((6/2)² + (−4/2)² − (−3)) = √(9 + 4 + 3) = √16 = <strong>4</strong></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: POSISI TITIK & GARIS -->
+    <div id="tab-posisi" class="tab-content">
+      <h2>Posisi Titik &amp; Garis Terhadap Lingkaran</h2>
+      <div class="rumus-box blue full-width">
+        <h3>Posisi Titik P(x₁, y₁) terhadap Lingkaran (x−a)²+(y−b)²=r²</h3>
+        <p>Hitung nilai: \( (x_1-a)^2 + (y_1-b)^2 \)</p>
+        <div class="posisi-table">
+          <div class="posisi-row inside"><span class="posisi-icon">🔵</span><span>Hasil <strong>&lt; r²</strong></span><span>→ Titik di <strong>dalam</strong> lingkaran</span></div>
+          <div class="posisi-row on"><span class="posisi-icon">🟢</span><span>Hasil <strong>= r²</strong></span><span>→ Titik <strong>pada</strong> lingkaran</span></div>
+          <div class="posisi-row outside"><span class="posisi-icon">🔴</span><span>Hasil <strong>&gt; r²</strong></span><span>→ Titik di <strong>luar</strong> lingkaran</span></div>
+        </div>
+      </div>
+      <div class="rumus-box green full-width" style="margin-top:20px">
+        <h3>Posisi Garis terhadap Lingkaran (gunakan Diskriminan)</h3>
+        <div class="posisi-table">
+          <div class="posisi-row inside"><span class="posisi-icon">✂️</span><span><strong>D &gt; 0</strong></span><span>→ Garis <strong>memotong</strong> lingkaran di 2 titik</span></div>
+          <div class="posisi-row on"><span class="posisi-icon">👆</span><span><strong>D = 0</strong></span><span>→ Garis <strong>menyinggung</strong> lingkaran</span></div>
+          <div class="posisi-row outside"><span class="posisi-icon">🚫</span><span><strong>D &lt; 0</strong></span><span>→ Garis <strong>tidak memotong</strong> lingkaran</span></div>
+        </div>
+      </div>
+      <div class="contoh-box">
+        <h3>📝 Contoh Soal</h3>
+        <p><strong>Soal:</strong> Tentukan posisi titik A(3, 4) terhadap lingkaran x² + y² = 20.</p>
+        <div class="jawaban">
+          <p><strong>Jawab:</strong> Hitung 3² + 4² = 9 + 16 = 25</p>
+          <p>r² = 20. Karena 25 &gt; 20, maka titik A berada di <strong>luar lingkaran</strong>.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== RUMUS CEPAT ===== -->
+<section id="page-rumus" class="page">
+  <div class="page-header">
+    <h1>⚡ Rumus Cepat</h1>
+    <p>Kumpulan semua rumus penting lingkaran dalam satu halaman</p>
+  </div>
+  <div class="rumus-cepat-grid">
+    <div class="rc-card"><h4>Diameter</h4><div class="formula small">\(d = 2r\)</div></div>
+    <div class="rc-card"><h4>Keliling</h4><div class="formula small">\(K = 2\pi r = \pi d\)</div></div>
+    <div class="rc-card"><h4>Luas</h4><div class="formula small">\(L = \pi r^2\)</div></div>
+    <div class="rc-card"><h4>Panjang Busur</h4><div class="formula small">\(s = \dfrac{\theta}{360°} \times 2\pi r\)</div></div>
+    <div class="rc-card"><h4>Luas Juring</h4><div class="formula small">\(L = \dfrac{\theta}{360°} \times \pi r^2\)</div></div>
+    <div class="rc-card"><h4>Sudut Pusat &amp; Keliling</h4><div class="formula small">\(\angle \text{pusat} = 2 \times \angle \text{keliling}\)</div></div>
+    <div class="rc-card"><h4>Sudut Keliling ↔ Diameter</h4><div class="formula small">\(\angle = 90°\)</div></div>
+    <div class="rc-card"><h4>Sudut Dalam Lingkaran</h4><div class="formula small">\(\text{Sudut} = \dfrac{1}{2}(\text{jumlah busur})\)</div></div>
+    <div class="rc-card"><h4>Sudut Luar Lingkaran</h4><div class="formula small">\(\text{Sudut} = \dfrac{1}{2}(\text{selisih busur})\)</div></div>
+    <div class="rc-card"><h4>Panjang Tali Busur</h4><div class="formula small">\(AB = 2r\sin\dfrac{\theta}{2}\)</div></div>
+    <div class="rc-card"><h4>Luas Segitiga</h4><div class="formula small">\(L = \dfrac{1}{2}r^2\sin\theta\)</div></div>
+    <div class="rc-card"><h4>GSPL</h4><div class="formula small">\(d = \sqrt{p^2-(R-r)^2}\)</div></div>
+    <div class="rc-card"><h4>GSPD</h4><div class="formula small">\(d = \sqrt{p^2-(R+r)^2}\)</div></div>
+    <div class="rc-card"><h4>Persamaan (O(0,0))</h4><div class="formula small">\(x^2+y^2=r^2\)</div></div>
+    <div class="rc-card"><h4>Persamaan (P(a,b))</h4><div class="formula small">\((x-a)^2+(y-b)^2=r^2\)</div></div>
+    <div class="rc-card"><h4>Bentuk Umum</h4><div class="formula small">\(x^2+y^2+Ax+By+C=0\)</div></div>
+    <div class="rc-card"><h4>Pusat (Bentuk Umum)</h4><div class="formula small">\(P\!\left(-\dfrac{A}{2},-\dfrac{B}{2}\right)\)</div></div>
+    <div class="rc-card"><h4>Jari-jari (Bentuk Umum)</h4><div class="formula small">\(r=\sqrt{\left(\dfrac{A}{2}\right)^2+\left(\dfrac{B}{2}\right)^2-C}\)</div></div>
+  </div>
+  <div class="tips-box">
+    <h3>💡 Tips Penting</h3>
+    <ul>
+      <li>Diameter = 2 × jari-jari</li>
+      <li>Sudut pusat = 2 × sudut keliling (menghadap busur yang sama)</li>
+      <li>Sudut keliling yang menghadap diameter selalu 90°</li>
+      <li>Garis singgung selalu tegak lurus jari-jari di titik singgung</li>
+      <li>Bentuk baku persamaan lingkaran penting untuk menentukan pusat dan jari-jari</li>
+      <li>Posisi titik dan garis terhadap lingkaran sering keluar dalam soal ujian</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===== VISUAL INTERAKTIF ===== -->
+<section id="page-visual" class="page">
+  <div class="page-header">
+    <h1>🎨 Visual Interaktif</h1>
+    <p>Eksplorasi lingkaran secara visual dan interaktif</p>
+  </div>
+
+  <div class="visual-grid">
+    <!-- Simulasi Lingkaran -->
+    <div class="visual-card">
+      <h3>🔵 Simulasi Lingkaran</h3>
+      <canvas id="simCanvas" width="300" height="300"></canvas>
+      <div class="sim-controls">
+        <label>Jari-jari: <strong id="rVal">80</strong></label>
+        <input type="range" id="rSlider" min="20" max="130" value="80" oninput="updateSim()"/>
+        <label>Warna:</label>
+        <input type="color" id="colorPicker" value="#3b82f6" oninput="updateSim()"/>
+      </div>
+    </div>
+
+    <!-- Simulasi Sudut Pusat -->
+    <div class="visual-card">
+      <h3>🔺 Simulasi Sudut Pusat &amp; Busur</h3>
+      <canvas id="sudutCanvas" width="300" height="300"></canvas>
+      <div class="sim-controls">
+        <label>Sudut Pusat: <strong id="sudutVal">90</strong>°</label>
+        <input type="range" id="sudutSlider" min="1" max="359" value="90" oninput="updateSudut()"/>
+        <div class="sim-info" id="sudutInfo"></div>
+      </div>
+    </div>
+
+    <!-- Simulasi Persamaan Lingkaran -->
+    <div class="visual-card wide">
+      <h3>📈 Simulasi Persamaan Lingkaran</h3>
+      <div class="persamaan-sim">
+        <canvas id="persCanvas" width="340" height="340"></canvas>
+        <div class="pers-controls">
+          <div class="calc-input"><label>Pusat a (x):</label><input type="number" id="persA" value="0" oninput="updatePers()"/></div>
+          <div class="calc-input"><label>Pusat b (y):</label><input type="number" id="persB" value="0" oninput="updatePers()"/></div>
+          <div class="calc-input"><label>Jari-jari r:</label><input type="number" id="persR" value="3" min="1" max="8" oninput="updatePers()"/></div>
+          <div class="pers-result" id="persResult"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LATIHAN SOAL ===== -->
+<section id="page-latihan" class="page">
+  <div class="page-header">
+    <h1>📝 Latihan Soal</h1>
+    <p>Uji pemahamanmu dengan soal-soal berikut</p>
+  </div>
+  <div id="latihan-container"></div>
+</section>
+
+<!-- ===== KUIS ===== -->
+<section id="page-kuis" class="page">
+  <div class="page-header">
+    <h1>🏆 Kuis Lingkaran</h1>
+    <p>10 soal pilihan ganda — lihat skormu langsung!</p>
+  </div>
+  <div id="kuis-start">
+    <div class="kuis-intro">
+      <div class="kuis-icon">🎯</div>
+      <h2>Siap Mengerjakan Kuis?</h2>
+      <p>Kuis terdiri dari <strong>10 soal</strong> pilihan ganda tentang materi lingkaran kelas 11.</p>
+      <p>Jawab semua soal, lalu lihat skor dan pembahasanmu!</p>
+      <button class="btn-primary" onclick="startKuis()">Mulai Kuis!</button>
+    </div>
+  </div>
+  <div id="kuis-soal" style="display:none"></div>
+  <div id="kuis-result" style="display:none"></div>
+</section>
+
+<!-- ===== PROFIL ===== -->
+<section id="page-profil" class="page">
+  <div class="page-header">
+    <h1>👤 Profil</h1>
+    <p>Tentang web dan pembuatnya</p>
+  </div>
+
+  <div class="profil-wrapper">
+
+    <!-- Card Pembuat -->
+    <div class="profil-pembuat-card">
+      <div class="credit-avatar-ring">
+        <img
+          src="foto-creator/WhatsApp Image 2026-04-15 at 11.16.55 AM.jpeg"
+          alt="Foto Alicia Jessica Mirabel"
+          class="credit-photo"
+          onerror="this.style.display='none';document.getElementById('profil-initials').style.display='flex';"
+        />
+        <div class="credit-initials" id="profil-initials">AJM</div>
+      </div>
+      <div class="credit-badge-top">✦ Pembuat ✦</div>
+      <h2 class="credit-name">Alicia Jessica Mirabel</h2>
+      <p class="credit-role">Siswa Kelas XI SIJA 1</p>
+      <div class="credit-presensi">No. Presensi &nbsp;<strong>03</strong></div>
+      <div class="credit-divider"></div>
+      <div class="credit-detail-grid">
+        <div class="credit-detail-item">
+          <span class="cd-icon">🏫</span>
+          <div>
+            <div class="cd-label">Sekolah</div>
+            <div class="cd-value">SMK Negeri 7 Semarang</div>
+          </div>
+        </div>
+        <div class="credit-detail-item">
+          <span class="cd-icon">📚</span>
+          <div>
+            <div class="cd-label">Kelas / Jurusan</div>
+            <div class="cd-value">XI SIJA 1</div>
+          </div>
+        </div>
+        <div class="credit-detail-item">
+          <span class="cd-icon">🔢</span>
+          <div>
+            <div class="cd-label">No. Presensi</div>
+            <div class="cd-value">03</div>
+          </div>
+        </div>
+        <div class="credit-detail-item">
+          <span class="cd-icon">📅</span>
+          <div>
+            <div class="cd-label">Tahun</div>
+            <div class="cd-value">2026</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card Tentang Web -->
+    <div class="profil-web-card">
+      <h3>📋 Tentang Web Ini</h3>
+      <p>Web ini dibuat sebagai <strong>media pembelajaran interaktif</strong> untuk materi Lingkaran kelas 11 SMA/MA. Dirancang agar siswa dapat belajar dengan cara yang lebih menyenangkan, visual, dan mudah dipahami.</p>
+      <div class="profil-info" style="margin-top:16px;margin-bottom:0">
+        <div class="profil-row"><span>📚 Mata Pelajaran</span><strong>Matematika</strong></div>
+        <div class="profil-row"><span>🏫 Jenjang</span><strong>SMA/MA Kelas 11</strong></div>
+        <div class="profil-row"><span>📖 Materi</span><strong>Lingkaran</strong></div>
+        <div class="profil-row"><span>🎯 Tujuan</span><strong>Media Pembelajaran Interaktif</strong></div>
+      </div>
+      <div class="credit-tech-list" style="margin-top:16px">
+        <div class="credit-tech-item"><span>🌐</span> HTML5</div>
+        <div class="credit-tech-item"><span>🎨</span> CSS3</div>
+        <div class="credit-tech-item"><span>⚡</span> JavaScript</div>
+        <div class="credit-tech-item"><span>🖼️</span> Canvas API</div>
+        <div class="credit-tech-item"><span>🔢</span> MathJax</div>
+        <div class="credit-tech-item"><span>✏️</span> Google Fonts</div>
+      </div>
+    </div>
+
+    <!-- Card Fitur -->
+    <div class="profil-fitur-card">
+      <h3>⚙️ Fitur Web Ini</h3>
+      <div class="fitur-list">
+        <div class="fitur-item">✅ Materi lengkap dengan penjelasan</div>
+        <div class="fitur-item">✅ Rumus cepat semua topik</div>
+        <div class="fitur-item">✅ Kalkulator interaktif</div>
+        <div class="fitur-item">✅ Visual animasi lingkaran</div>
+        <div class="fitur-item">✅ Simulasi sudut &amp; persamaan</div>
+        <div class="fitur-item">✅ Latihan soal dengan pembahasan</div>
+        <div class="fitur-item">✅ Kuis dengan skor otomatis</div>
+        <div class="fitur-item">✅ Efek bintang interaktif</div>
+      </div>
+    </div>
+
+    <!-- Card Terima Kasih -->
+    <div class="profil-thanks-card">
+      <h3>🙏 Ucapan Terima Kasih</h3>
+      <div class="credit-thanks-list">
+        <div class="credit-thanks-item">
+          <span class="ct-icon">👨‍🏫</span>
+          <div>
+            <strong>Guru Pembimbing</strong>
+            <p>Atas bimbingan dan arahan dalam pembuatan proyek ini</p>
+          </div>
+        </div>
+        <div class="credit-thanks-item">
+          <span class="ct-icon">📖</span>
+          <div>
+            <strong>Sumber Materi</strong>
+            <p>Buku Matematika Kelas 11 Kurikulum Merdeka</p>
+          </div>
+        </div>
+        <div class="credit-thanks-item">
+          <span class="ct-icon">👨‍👩‍👧‍👦</span>
+          <div>
+            <strong>Keluarga &amp; Teman</strong>
+            <p>Atas dukungan dan semangat selama proses pembuatan</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <p>⭕ Media Pembelajaran Lingkaran Kelas 11 &nbsp;|&nbsp; Matematika SMA &nbsp;|&nbsp; Made with ❤️</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
